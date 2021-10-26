@@ -1,6 +1,6 @@
 class Solution {
     public int reverse(int x) {
-        long max = 2147483647l;
+        long max = Integer.MAX_VALUE;
         long rev=0;
         boolean sign=x<0;
         x=Math.abs(x);
