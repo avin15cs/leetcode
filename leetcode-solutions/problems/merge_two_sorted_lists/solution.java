@@ -9,40 +9,49 @@
  * }
  */
 class Solution {
+//     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        
+//         if(list1==null) return list2;
+        
+//         if(list2==null) return list1;
+        
+//         if(list1.val<=list2.val){
+//             list1.next=mergeTwoLists(list1.next,list2);
+//             return list1;
+//         }
+        
+//         else{
+//             list2.next=mergeTwoLists(list1,list2.next);
+//             return list2;
+//         }
+//     }
+    
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-
-        if(l1==null && l2 == null)
-            return null;
         
-        if(l1==null)
-            return l2;
-        
-        if(l2==null)
-            return l1;
-        
-        ListNode list = new ListNode(0);
-        ListNode prev = list;   
-        
+        ListNode dummy=new ListNode(0);
+        ListNode l=dummy;
         while(l1!=null && l2!=null){
             
-            if(l1.val<=l2.val){
-                prev.next=l1;
-                l1=l1.next;
-                }
             
+            if(l1.val<=l2.val){
+                l.next=new ListNode(l1.val);
+                l1=l1.next;
+            }
             else{
-                prev.next=l2;
+                l.next=new ListNode(l2.val);
                 l2=l2.next;
             }
             
-            prev=prev.next;
+            l=l.next;
         }
-        if(l1!=null)
-            prev.next=l1;
         
-        if(l2!=null)
-            prev.next=l2;
+        if(l1==null)
+            l.next=l2;
+            
+        if(l2==null)
+            l.next=l1;
         
-        return list.next;
+        return dummy.next;
+        
     }
 }
