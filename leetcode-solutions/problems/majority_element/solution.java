@@ -1,20 +1,27 @@
 class Solution {
-    public int majorityElement(int[] nums) {
-        int maj=nums[0];
-        int pos=1;
-        for(int i=1;i<nums.length;i++) {
+    // public int majorityElement(int[] nums) {
+    //     Map<Integer,Integer> map=new HashMap<>();
+    //     for(int i:nums){
+    //         map.put(i,map.getOrDefault(i,0)+1);
+    //         if(2*map.get(i)>nums.length){
+    //             return i;
+    //         }
+    //     }
 
-            if(nums[i]==maj) {
-                pos++;
-            } else {
-                pos--;
-            } 
-            if(pos==0) {
-                maj=nums[i];
-                pos=1;
+    //     return -1;
+    // }
+
+        public int majorityElement(int[] nums) {
+            int count=0,candidate=0;
+            for(int i:nums){
+                if(count==0){
+                    candidate=i;
+                }
+                if(candidate!=i)
+                    count--;
+                else
+                    count++;
             }
+            return candidate;
         }
-
-        return maj;
-    }
 }
