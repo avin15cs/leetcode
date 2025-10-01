@@ -1,17 +1,40 @@
 class Solution {
+    // public boolean isAnagram(String s, String t) {
+    //     if (s.length() != t.length()) {
+    //         return false;
+    //     }
+
+    //     HashMap<Character, Integer> sCount = new HashMap<>();
+    //     HashMap<Character, Integer> tCount = new HashMap<>();
+
+    //     for (int i = 0; i < s.length(); i++) {
+    //         sCount.put(s.charAt(i), 1 + sCount.getOrDefault(s.charAt(i), 0));
+    //         tCount.put(t.charAt(i), 1 + tCount.getOrDefault(t.charAt(i), 0));
+    //     }
+
+    //     return sCount.equals(tCount);        
+    // }
+
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) {
             return false;
         }
 
-        HashMap<Character, Integer> sCount = new HashMap<>();
-        HashMap<Character, Integer> tCount = new HashMap<>();
+        int[] ch=new int[26];
+        for(int i=0;i<s.length();i++) {
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
 
-        for (int i = 0; i < s.length(); i++) {
-            sCount.put(s.charAt(i), 1 + sCount.getOrDefault(s.charAt(i), 0));
-            tCount.put(t.charAt(i), 1 + tCount.getOrDefault(t.charAt(i), 0));
+            ch[sc-'a']++;
+            ch[tc-'a']--;
         }
 
-        return sCount.equals(tCount);        
+        for(int i=0;i<26;i++) {
+            if(ch[i]!=0)
+                return false;
+        }
+
+        return true;
+
     }
 }
