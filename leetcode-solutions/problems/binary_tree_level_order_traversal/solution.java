@@ -15,33 +15,37 @@
  */
 class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        
-        
-        
-        List<List<Integer>> res=new ArrayList<>();
-        if(root==null)  return res;
-        Queue<TreeNode> q=new LinkedList<>();
-        q.add(root);
-        
-        while(!q.isEmpty()){
-            int size=q.size();
-            List<Integer> level=new ArrayList<>();
-            while(size!=0){
-                TreeNode node=q.remove();
-                level.add(node.val);
-                
-                if(node.left!=null)
-                    q.add(node.left);
-                
-                if(node.right!=null)
-                    q.add(node.right);
-                
-                size--;
+        List<List<Integer>> list=new ArrayList<>();
+        if(root==null) return list;
+        Queue<TreeNode> que=new LinkedList<>();
+        que.add(root);
+        int size=que.size();
+        List<Integer> ilist=new ArrayList<>();
+        while(size!=0){
+            TreeNode node=que.remove();
+            ilist.add(node.val);
+            if(node.left!=null) que.add(node.left);
+            if(node.right!=null) que.add(node.right);
+            size--;
+            if(size==0){
+                size=que.size();
+                list.add(ilist);
+                ilist=new ArrayList<>();
             }
-            
-            res.add(level);
         }
-        
-        return res;
+
+        // while(!que.isEmpty()){
+        //     int size=que.size();
+        //     List<Integer> ilist=new ArrayList<>();
+        //     for(int i=0;i<size;i++) {
+        //         TreeNode node=que.remove();
+        //         ilist.add(node.val);
+        //         if(node.left!=null) que.add(node.left);
+        //         if(node.right!=null) que.add(node.right);
+        //     }
+        //     list.add(ilist);
+        // }
+
+        return list;
     }
 }
