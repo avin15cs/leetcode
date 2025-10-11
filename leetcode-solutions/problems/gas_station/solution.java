@@ -12,22 +12,6 @@ class Solution {
         if(totalGas<totalCost)
             return -1;
             
-        // for(int i=0;i<n;i++){
-            
-        //     if(gas[i]>=cost[i]) {
-        //         j=i;
-        //         int total=0;
-        //         while(true) {
-        //             total+=gas[j]-cost[j];
-        //             if(total<0) break;
-        //             j=(j+1)%n;
-        //             if(i==j)
-        //                 return i;
-        //         }
-        //     }
-        // }
-
-        // return -1;
         int currentGas = 0;
         int start = 0;
 
