@@ -15,22 +15,26 @@
  */
 class Solution {
     public int kthSmallest(TreeNode root, int k) {
-        
-        traverse(root,k);
-        return result;
+        // if(root==null)  return 0;
+
+        kth(root, new int[]{k});
+        return res;
+
     }
-    
-    int count=0;
-    int result=Integer.MIN_VALUE;
-    private void traverse(TreeNode root, int k){
-        if(root==null)  return;
+
+    int res=Integer.MIN_VALUE;
+    private void kth(TreeNode root, int[] pos){
+        if(root==null)
+            return;
         
-        // if(result!=Integer.MIN_VALUE)   return;
-        
-        traverse(root.left,k);
-        count++;
-        if(count==k)    result=root.val;        
-        if(count<k) traverse(root.right, k);
-        
+        if(res!=Integer.MIN_VALUE)
+            return;
+
+        kth(root.left,pos);
+        pos[0]--;
+        if(pos[0]==0)
+            res=root.val;
+        kth(root.right,pos);        
     }
+
 }
