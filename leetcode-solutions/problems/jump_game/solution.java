@@ -29,11 +29,11 @@ class Solution {
 
     public boolean canJump(int[] nums)
     {
-        int pos=0;
+        int farthest=0,n=nums.length-1;
         for(int i=0;i<nums.length;i++) {
-            if(pos<i)
+            if(farthest<i)
                 return false;
-            pos=Math.max(pos,nums[i]+i);
+            farthest=Math.max(farthest,i+nums[i]);
         }
 
         return true;
