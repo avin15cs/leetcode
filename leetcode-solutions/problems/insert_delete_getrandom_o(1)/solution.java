@@ -1,28 +1,35 @@
 class RandomizedSet {
-    Set<Integer> set;
+    List<Integer> list;
+    Map<Integer,Integer> map;
+    Random rand;
     public RandomizedSet() {
-        set = new HashSet<>();
+        map=new HashMap<>();
+        list=new ArrayList<>();
+        rand = new Random();
     }
     
     public boolean insert(int val) {
-        if(set.contains(val)) return false;
-
-        set.add(val);
+        if(map.containsKey(val)) return false;
+        list.add(val);
+        map.put(val,list.size()-1);
         return true;
     }
     
     public boolean remove(int val) {
-        if(set.contains(val)){
-            set.remove(val);
-            return true;
+        if(map.containsKey(val)) {
+            int curpos=map.get(val);
+            int lastval=list.get(list.size()-1);
+            list.set(curpos,lastval);
+            list.remove(list.size()-1);
+            map.put(lastval,curpos);
+            map.remove(val);
+            return true;    
         }
 
         return false;
     }
     
     public int getRandom() {
-        Random rand = new Random();
-        List<Integer> list = new ArrayList<>(set);
         return list.get(rand.nextInt(list.size()));
     }
 }
