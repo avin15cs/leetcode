@@ -34,7 +34,7 @@ class Solution {
     // }
 
     //Using Binary Search
-    public int[] twoSum(int[] numbers, int target) {
+ public int[] twoSum(int[] numbers, int target) {
     for (int i = 0; i < numbers.length; i++) {
         int left = i + 1;
         int right = numbers.length - 1;
@@ -55,5 +55,4 @@ class Solution {
     
     return new int[]{-1, -1};
 }
-
 }
