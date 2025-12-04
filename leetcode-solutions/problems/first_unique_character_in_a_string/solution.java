@@ -1,12 +1,11 @@
 class Solution {
     public int firstUniqChar(String s) {
-        
-		char[] a = s.toCharArray();
-		
-		for(int i=0; i<a.length;i++){
-			if(s.indexOf(a[i])==s.lastIndexOf(a[i])){return i;}
-		}
-		return -1;
-        
+        for(int i=0;i<s.length();i++) {
+            char c=s.charAt(i);
+            if(s.indexOf(c)==s.lastIndexOf(c))
+                return i;
+        }
+
+        return -1;
     }
 }
