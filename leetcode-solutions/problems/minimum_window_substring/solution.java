@@ -1,64 +1,45 @@
 class Solution {
     public String minWindow(String s, String t) {
-    int sl = s.length();
-    int tl = t.length();
-    if (sl < tl) return "";
+        int n=s.length();
+        int m=t.length();
 
-    int i = 0, j = 0;
+        if(m>n)
+            return "";
 
-    Map<Character, Integer> tmap = new HashMap<>();
-    for (int k = 0; k < tl; k++) {
-        char c = t.charAt(k);
-        tmap.put(c, tmap.getOrDefault(c, 0) + 1);
-    }
+        HashMap<Character,Integer> smap=new HashMap<>();
+        HashMap<Character,Integer> tmap=new HashMap<>();
 
-    int size = tmap.size();  // number of unique chars needed
-    Map<Character, Integer> smap = new HashMap<>();
-    int reqSize = 0;
-
-    int minSize = Integer.MAX_VALUE;
-    int start = 0;
-
-    while (j < sl) {
-
-        char c = s.charAt(j);
-
-        // INSERT ALWAYS
-        smap.put(c, smap.getOrDefault(c, 0) + 1);
-
-        // MATCH ONLY IF RELEVANT
-        if (tmap.containsKey(c) &&
-            smap.get(c).intValue() == tmap.get(c).intValue()) {
-            reqSize++;
+        for(char c:t.toCharArray()) {
+            tmap.put(c,tmap.getOrDefault(c,0)+1);
         }
 
-        // SHRINK
-        while (reqSize == size) {
+        int size=tmap.size();
+        int reqSize=0;
+        int i=0,j=0;
+        int min=Integer.MAX_VALUE;
+        int start=i;
+        while(j<n) {
+            char c=s.charAt(j);
+            smap.put(c,smap.getOrDefault(c,0)+1);
 
-            if (j - i + 1 < minSize) {
-                minSize = j - i + 1;
-                start = i;
+            if(tmap.containsKey(c) && tmap.get(c).intValue()==smap.get(c).intValue())
+                reqSize++;
+
+            while(size==reqSize) {
+
+                if(min>j-i+1) {
+                    min=j-i+1;
+                    start=i;
+                }
+                char ch=s.charAt(i);
+                smap.put(ch,smap.get(ch)-1);
+                
+                if(tmap.containsKey(ch) && tmap.get(ch)>smap.get(ch))
+                    reqSize--;
+                i++;
             }
-
-            char ci = s.charAt(i);
-
-            // REMOVE ALWAYS
-            smap.put(ci, smap.get(ci) - 1);
-
-            // BREAK MATCH ONLY IF RELEVANT
-            if (tmap.containsKey(ci) &&
-                smap.get(ci) < tmap.get(ci)) {
-                reqSize--;
-            }
-
-            i++;
+            j++;
         }
-
-        j++;
-    }
-
-    return minSize == Integer.MAX_VALUE
-            ? ""
-            : s.substring(start, start + minSize);
+        return min==Integer.MAX_VALUE?"":s.substring(start,start+min);
     }
 }
