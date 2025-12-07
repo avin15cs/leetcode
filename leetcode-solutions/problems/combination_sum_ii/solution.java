@@ -21,16 +21,14 @@ class Solution {
             ans.add(candidates[n-1]);
             solve(candidates,target-candidates[n-1],n-1,res,ans);
             ans.remove(ans.size()-1);
-        } 
-
-        int currentVal = candidates[n-1];
-        int nextN = n - 1;
-        
-        while (nextN > 0 && candidates[nextN-1] == currentVal) {
-            nextN--;
         }
 
-        solve(candidates,target,nextN,res,ans);
+        int curpos=n-1;
+        int curval=candidates[n-1];
+        while(curpos>0 && curval==candidates[curpos-1])
+            curpos--;
+
+        solve(candidates,target,curpos,res,ans);
     
     }
 }
