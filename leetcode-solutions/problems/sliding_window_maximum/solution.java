@@ -1,29 +1,36 @@
 class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        // Max Heap: store indices, compare by values
-        Queue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        int n=nums.length;
 
-        int n = nums.length;
-        int l = 0, r = 0;
-        int ans[] = new int[n - k + 1];
+        int[] left=new int[n];
+        int[] right=new int[n];
 
-        while (r < n) {
-            // push [value, index]
-            pq.offer(new int[]{nums[r], r});
+        left[0]=nums[0];
+        right[n-1]=nums[n-1];
 
-            // when window is full
-            if (r - l + 1 == k) {
-                // remove all elements outside the window
-                while (!pq.isEmpty() && pq.peek()[1] < l) {
-                    pq.poll();
-                }
-                // now top is valid maximum
-                ans[l] = pq.peek()[0];
-                l++; // slide window
+        //precompute left and right array
+
+        for(int i=1;i<n;i++) {
+            if((i+1)%k==0) {
+                left[i]=nums[i];
+            } else {
+                left[i]=Math.max(left[i-1],nums[i]);
             }
-            r++;
+            int j=n-i-1;
+            if((j+1)%k==0) {
+                right[j]=nums[j];
+            } else {
+                right[j]=Math.max(right[j+1],nums[j]);
+            }
         }
 
-        return ans;
+        
+
+        int out[] = new int[n-k+1];
+        for(int i=0;i+k<=n;i++) {
+            out[i]=Math.max(left[i+k-1],right[i]);
+        }
+
+        return out;
     }
 }
