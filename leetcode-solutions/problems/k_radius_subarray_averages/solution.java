@@ -1,28 +1,4 @@
 class Solution {
-    // public int[] getAverages(int[] nums, int k) {
-    //     int[] ans=new int[nums.length];
-    //     Arrays.fill(ans,-1);
-
-    //     int i=0,j=0;
-    //     int w=2*k+1;
-
-    //     int sum=0,avg=0;
-
-    //     while(j<nums.length){
-    //         sum+=nums[j];
-
-    //         if(j-i+1==w) {
-    //             avg=sum/w;
-    //             ans[k+i]=avg;
-    //             sum-=nums[i];
-    //             i++;
-    //         }
-    //         j++;
-    //     }
-
-    //     return ans;
-    // }
-
     public int[] getAverages(int[] nums, int k) {
         int n = nums.length;
         int[] ans = new int[n];
