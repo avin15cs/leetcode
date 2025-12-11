@@ -25,7 +25,7 @@ class Solution {
                 curEnd=farthest;
             }
 
-            if(curEnd>=n-1) break;
+            // if(curEnd>=n-1) break;
         }
 
         return jump;
