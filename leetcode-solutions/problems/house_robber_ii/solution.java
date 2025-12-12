@@ -34,14 +34,14 @@ class Solution {
     }
 
     private int solve(int[] nums, int i, int end, int[] dp) {
-    if (i > end) return 0;   // no houses left in this segment
+        if (i > end) return 0;
 
-    if (dp[i] != -1) return dp[i];
+        if (dp[i] != -1) return dp[i];
 
-    int pick = nums[i] + solve(nums, i + 2, end, dp);
-    int skip = solve(nums, i + 1, end, dp);
+        int pick = nums[i] + solve(nums, i + 2, end, dp);
+        int skip = solve(nums, i + 1, end, dp);
 
-    return dp[i] = Math.max(pick, skip);
-}
+        return dp[i] = Math.max(pick, skip);
+    }
 
 }
