@@ -5,14 +5,16 @@ class Solution {
         int i=0,j=0,n=s.length();
         int maxl=0;
         
-        while(j<n){
+        while(j<n) {
             char c=s.charAt(j);
-            while(set.contains(c)) {
+            
+            if(!set.contains(c)) {
+                set.add(c);
+                maxl=Math.max(maxl,set.size());
+                j++;   
+            }
+            else
                 set.remove(s.charAt(i++));
-            } 
-            set.add(c);
-            maxl=Math.max(maxl,set.size()); 
-            j++;  
         }
         
         return maxl;
