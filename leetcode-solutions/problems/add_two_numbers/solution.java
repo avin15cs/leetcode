@@ -13,11 +13,9 @@ class Solution {
         int sum=0;
         int carry=0;
         ListNode ans=new ListNode(0);
-        // ans.next=l1;
-
-        ListNode node = ans;
+        ListNode dummy=ans;
         while(l1!=null || l2!=null || carry!=0) {
-            sum=0;
+            sum=carry;
             if(l1!=null) {
                 sum+=l1.val;
                 l1=l1.next;
@@ -28,13 +26,11 @@ class Solution {
                 l2=l2.next;
             }
 
-            sum+=carry;
-
-            node.next=new ListNode(sum%10);
+            ans.next=new ListNode(sum%10);
+            ans=ans.next;
             carry=sum/10;
-            node=node.next;
         }
 
-        return ans.next;
+        return dummy.next;
     }
 }
