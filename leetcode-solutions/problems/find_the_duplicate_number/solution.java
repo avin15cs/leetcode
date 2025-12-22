@@ -1,23 +1,4 @@
 class Solution {
-    // public int findDuplicate(int[] nums) {
-    //     int i=0,n=nums.length;
-    //     while(i<n){
-    //         int correctIndex = nums[i] - 1;
-    //         if(nums[i]!=nums[correctIndex]){
-    //             int temp=nums[i];
-    //             nums[i]=nums[correctIndex];
-    //             nums[correctIndex]=temp;
-    //         }
-    //         else
-    //             i++;
-    //     }
-
-    //     for(i=0;i<n;i++)
-    //         if(i+1!=nums[i]) return nums[i];
-
-    //     return -1;
-    // }
-
     public int findDuplicate(int[] nums) {
         int i=0;
 
@@ -27,14 +8,18 @@ class Solution {
                 int temp=nums[i];
                 nums[i]=nums[correct];
                 nums[correct]=temp;
-            } else 
+            } else {
+                if(i!=correct)
+                    return nums[i];
                 i++;
+            }
+                
         }
 
-        for(i=0;i<nums.length;i++){
-            if(nums[i]!=i+1)    
-                return nums[i];
-        }
+        // for(i=0;i<nums.length;i++){
+        //     if(nums[i]!=i+1)    
+        //         return nums[i];
+        // }
         return -1;
     }
 }
