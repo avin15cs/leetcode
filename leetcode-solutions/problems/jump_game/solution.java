@@ -1,12 +1,5 @@
 class Solution {
     // public boolean canJump(int[] nums) {
-        // int maxSteps=0;
-        // for(int i=0;i<nums.length;i++){
-        //     if(maxSteps<i) return false;
-        //     maxSteps=Math.max(maxSteps,i+nums[i]);
-        // }
-        // return true;
-        
     //     Boolean[] dp=new Boolean[nums.length+1];
     //     return findPath(0,nums,dp);
     // }
