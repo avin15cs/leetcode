@@ -14,13 +14,14 @@ class Solution {
             int mid=l+(r-l)/2;
 
             if(nums[mid]<nums[0]) {
-                ans= nums[mid];
+                // ans= nums[mid];
                 r=mid-1;
             } else {
                 l=mid+1;
             }
         }
 
-        return ans;
+        // return ans;
+        return nums[l];
     }
 }
