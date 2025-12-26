@@ -8,22 +8,23 @@ class MinStack {
     public void push(int val) {
         list.add(val);
         min=Math.min(min,val);
+        list.add(min);
     }
     
     public void pop() {
-        int num=list.remove(list.size()-1);
-        int i=0;
-        if(min==num) {
-            min=Integer.MAX_VALUE;
-            while(i<list.size()) {
-                min=Math.min(min,list.get(i++));
-            }
-        }
+        list.remove(list.size()-1);
+        list.remove(list.size()-1);
 
+        if (!list.isEmpty()) {
+            min = list.get(list.size() - 1);
+        } else {
+            min = Integer.MAX_VALUE; 
+        }
     }
     
     public int top() {
-        return list.get(list.size()-1);
+        return list.get(list.size()-2);
+        
     }
     
     public int getMin() {
