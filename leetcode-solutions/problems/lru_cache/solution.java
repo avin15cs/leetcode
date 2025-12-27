@@ -21,27 +21,36 @@
 //     }
     
 //     public int get(int key) {
-//         if (!cache.containsKey(key)) return -1;
-//         Node node = cache.get(key);
+//         if(!cache.containsKey(key))
+//             return -1;
+
+//         Node node=cache.get(key);
+
 //         remove(node);
 //         insertToHead(node);
+
 //         return node.value;
+
 //     }
     
 //     public void put(int key, int value) {
+        
 //         if(cache.containsKey(key)) {
-//             Node node = cache.get(key);
+//             Node node=cache.get(key);
 //             node.value=value;
+
 //             remove(node);
 //             insertToHead(node);
 //         } else {
-//             Node node = new Node(key,value);
-//             cache.put(key, node);
+//             Node node = new Node(key, value);
+//             cache.put(key,node);
 //             insertToHead(node);
+
 //             if(cache.size()>capacity) {
-//                 Node lru = tail.prev;
-//                 remove(lru);
-//                 cache.remove(lru.key);
+//                 Node tnode = tail.prev;
+//                 remove(tnode);
+
+//                 cache.remove(tnode.key);
 //             }
 //         }
 //     }
