@@ -23,9 +23,9 @@ class Solution {
         if(root==null)
             return true;
         
-        if(root.val<=left||root.val>=right)
+        if(root.val<=left || root.val>=right)
             return false;
         
-        return check(root.left,left,root.val)&&check(root.right,root.val,right);
+        return check(root.left,left,root.val) && check(root.right,root.val,right);
     }
 }
