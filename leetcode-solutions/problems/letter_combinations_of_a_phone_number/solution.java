@@ -1,24 +1,27 @@
 class Solution {
-    String[] arr = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
 
+    private static final String[] map = {
+        "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+    };
     public List<String> letterCombinations(String digits) {
         List<String> ans = new ArrayList<>();
-        List<String> str = new ArrayList<>();
-        for(char c: digits.toCharArray()) {
-            String curAns = arr[c-'0'];
-            if(ans.size() == 0) {
-                str.add("");
-            } else {
-                str = ans;
-                ans = new ArrayList<>();
-            }
-            for(char ch: curAns.toCharArray()) {
-                for(String s: str) 
-                    ans.add(s+ch);
-            }
+        backtrack(digits,0,new StringBuilder(),ans);
+        return ans;
+    }
 
+
+    void backtrack(String digits, int index, StringBuilder sb, List<String> res) {
+        if(index == digits.length()) {
+            res.add(sb.toString());
+            return;
         }
 
-        return ans;
+        String letters = map[digits.charAt(index)-'0'];
+
+        for(char c: letters.toCharArray()) {
+            sb.append(c);
+            backtrack(digits,index+1,sb,res);
+            sb.deleteCharAt(sb.length()-1);
+        }
     }
 }
