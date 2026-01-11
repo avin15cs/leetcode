@@ -26,14 +26,14 @@ class Solution {
 
         cur=head;
         while(cur!=null) {
-            Node node=map.get(cur);
-            Node next=map.get(cur.next);
-            Node rand=map.get(cur.random);
+            Node node = map.get(cur);
+            Node next = map.get(cur.next);
+            Node random = map.get(cur.random);
 
-            node.next=next;
-            node.random=rand;
+            node.next = next;
+            node.random = random;
 
-            cur=cur.next;
+            cur = cur.next;
         }
 
         return map.get(head);
