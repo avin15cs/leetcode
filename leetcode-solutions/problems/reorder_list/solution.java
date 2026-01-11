@@ -27,12 +27,11 @@ class Solution {
             ListNode firstNext = first.next;
             ListNode secondNext = second.next;
 
-            first.next=second;
-            second.next=firstNext;
+            first.next = second;
+            second.next = firstNext;
 
-            first=firstNext;
+            first = firstNext;
             second=secondNext;
-            
         }
     }
 
