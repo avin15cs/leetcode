@@ -25,25 +25,51 @@ class Solution {
     //     solve(nums,sum,n-1,res,ans);
     // }
 
+    // public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    //     List<List<Integer>> res = new ArrayList<>();
+    //     backtrack(candidates, 0, target, new ArrayList<>(), res);
+    //     return res;
+    // }
+
+    // private void backtrack(int[] arr, int start, int target, List<Integer> curr, List<List<Integer>> res) {
+    //     if(target == 0) {
+    //         res.add(new ArrayList<>(curr));
+    //         return;
+    //     }
+        
+    //     if(target < 0) return;
+
+    //     for(int i = start; i < arr.length; i++) {
+
+    //         curr.add(arr[i]);  // include arr[i]
+    //         backtrack(arr, i, target - arr[i], curr, res); // i not i+1 → reuse allowed
+    //         curr.remove(curr.size() - 1); // backtrack
+
+    //     }
+    // }
+
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         List<List<Integer>> res = new ArrayList<>();
+
         backtrack(candidates, 0, target, new ArrayList<>(), res);
         return res;
     }
 
-    private void backtrack(int[] arr, int start, int target, List<Integer> curr, List<List<Integer>> res) {
-        if(target == 0) {
-            res.add(new ArrayList<>(curr));
+
+    void backtrack(int[] num, int pos, int total, List<Integer> cur, List<List<Integer>> res) {
+        if(total==0){
+            List<Integer> list = new ArrayList<>(cur);
+            res.add(list);
             return;
         }
-        
-        if(target < 0) return;
 
-        for(int i = start; i < arr.length; i++) {
-            if (arr[i] > target) continue;
-            curr.add(arr[i]);  // include arr[i]
-            backtrack(arr, i, target - arr[i], curr, res); // i not i+1 → reuse allowed
-            curr.remove(curr.size() - 1); // backtrack
+        for(int i=pos;i<num.length;i++) {
+            if(num[i]>total)  continue;
+            cur.add(num[i]);
+            backtrack(num,i,total-num[i],cur,res);
+            cur.remove(cur.size()-1);
+
         }
     }
 }
+
