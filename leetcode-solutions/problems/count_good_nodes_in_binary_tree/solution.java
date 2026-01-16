@@ -18,20 +18,20 @@ class Solution {
         return solve(root,root.val);
     }
 
-    int solve(TreeNode node, int maxSoFar) {
-        if(node==null)
+    private int solve(TreeNode root, int maxSoFar) {
+        if(root==null)
             return 0;
-        
-        int good=0;
 
-        if(node.val>=maxSoFar){
+        int good = 0;
+        if(root.val>=maxSoFar) {
             good=1;
-            maxSoFar=node.val;
+            maxSoFar = root.val;
         }
-
-        good+=solve(node.left,maxSoFar);
-        good+=solve(node.right,maxSoFar);
+ 
+        good+=solve(root.left, maxSoFar);
+        good+=solve(root.right, maxSoFar);
 
         return good;
+
     }
 }
