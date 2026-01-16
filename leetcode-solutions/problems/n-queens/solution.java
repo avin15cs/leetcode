@@ -14,6 +14,7 @@ class Solution {
             res.add(construct(chess));
             return;
         }
+        
         for(int col=0;col<chess.length;col++) {
             if(isSafe(chess,row,col)) {
                 chess[row][col]='Q';
@@ -22,6 +23,7 @@ class Solution {
             }
         }
     }
+
     boolean isSafe(char[][] chess, int row, int col) {
         //Up
         for(int i=row-1;i>=0;i--) {
