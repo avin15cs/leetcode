@@ -47,9 +47,11 @@ class Solution {
         }
 
         for(int i=start;i<candidates.length;i++) {
+
+            // Skip duplicates at the same tree level => ask chatGPT if you dont understand
             if(i>start && candidates[i]==candidates[i-1])
                 continue;
-            
+
             if(candidates[i]<=target) {
                 ans.add(candidates[i]);
                 backtrack(candidates,i+1,target-candidates[i],res,ans);
