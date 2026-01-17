@@ -1,7 +1,9 @@
 class Solution {
     public boolean checkValidString(String st) {
-        int max=0;
-        int min=0;
+
+        //this is range of open bracket. 
+        int max=0; //max no of open brackets 
+        int min=0; //min no of open brackets
         for(char c: st.toCharArray()) {
             if(c=='(') {
                 max++;
@@ -21,6 +23,6 @@ class Solution {
                 return false;
         }
 
-        return min==0;
+        return min==0 ;
     }
 }
