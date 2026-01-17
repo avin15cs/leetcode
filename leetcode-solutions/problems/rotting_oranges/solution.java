@@ -1,36 +1,55 @@
 class Solution {
+
     public int orangesRotting(int[][] grid) {
-        if(grid==null ||grid.length==0) return -1;
+        int rows = grid.length;
+        int cols = grid[0].length;
 
-        for(int i=0;i<grid.length;i++) {
-            for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]==2)
-                    rotAdj(grid, i,j,2);
+        Queue<int[]> queue = new LinkedList<>();
+        int fresh = 0;
+
+        // Step 1: Initialize queue with all rotten oranges
+        for (int r = 0; r < rows; r++) {
+            for (int c = 0; c < cols; c++) {
+                if (grid[r][c] == 2) {
+                    queue.offer(new int[]{r, c});
+                } else if (grid[r][c] == 1) {
+                    fresh++;
+                }
             }
         }
 
-        int minutes=2;
-        for(int[] row:grid) {
-            for(int cell:row) {
-                if(cell==1)
-                    return -1;
-                minutes=Math.max(minutes,cell);
+        // If no fresh oranges
+        if (fresh == 0) return 0;
+
+        int minutes = 0;
+        int[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+
+        // Step 2: BFS level by level (each level = 1 minute)
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            boolean rottedThisMinute = false;
+
+            for (int i = 0; i < size; i++) {
+                int[] curr = queue.poll();
+
+                for (int[] d : directions) {
+                    int nr = curr[0] + d[0];
+                    int nc = curr[1] + d[1];
+
+                    if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr][nc] == 1) {
+                        grid[nr][nc] = 2;
+                        fresh--;
+                        queue.offer(new int[]{nr, nc});
+                        rottedThisMinute = true;
+                    }
+                }
             }
-        }
-        return minutes-2;
-    }
 
-    void rotAdj(int[][] grid, int r, int c, int minutes) {
-        if(r<0||c<0||r>=grid.length||c>=grid[0].length||(grid[r][c]!=1&&grid[r][c]<minutes)) {
-            return;
+            if (rottedThisMinute) minutes++;
         }
 
-        grid[r][c]=minutes;
-        rotAdj(grid,r+1,c,minutes+1);
-        rotAdj(grid,r-1,c,minutes+1);
-        rotAdj(grid,r,c+1,minutes+1);
-        rotAdj(grid,r,c-1,minutes+1);
+        // Step 3: Check if any fresh orange remains
+        return fresh == 0 ? minutes : -1;
     }
-
 
 }
