@@ -21,7 +21,7 @@ class Solution {
             list.add(intervals[i]);
             i++;
         }
-            
-        return list.toArray(new int[0][]);
+        //return list.toArray(new int[0][]); => this is also correct approach
+        return list.toArray(new int[list.size()][]);
     }
 }
