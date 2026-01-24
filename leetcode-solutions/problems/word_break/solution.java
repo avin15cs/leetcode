@@ -6,21 +6,21 @@ class Solution {
         return solve(0,s,dict,dp);
     }
 
-    boolean solve(int i, String s, Set<String> dict,Boolean[] dp) {
-        if(s.length()==i) {
+    boolean solve(int idx, String s, Set<String> dict, Boolean[] dp) {
+        if(idx==s.length())
             return true;
-        }
 
-        if(dp[i]!=null)
-            return dp[i];
+        if(dp[idx]!=null)
+            return dp[idx];
 
         for(String word: dict) {
-            if(s.startsWith(word,i)) {
-                if(solve(i+word.length(),s,dict,dp))
-                    return dp[i]=true;
+            if(s.startsWith(word,idx)) {
+                if(solve(idx+word.length(),s,dict,dp)) {
+                    return dp[idx]=true;
+                }
             }
         }
 
-        return dp[i]=false;
+        return dp[idx]=false;
     }
 }
