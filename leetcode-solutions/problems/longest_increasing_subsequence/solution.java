@@ -23,71 +23,36 @@ class Solution {
     //         return dp[n][prev+1]=skip;   
     //     }
     // }
-    // public int lengthOfLIS(int[] nums) {
-    //     int n=nums.length;
-
-    //     List<Integer> list=new ArrayList<>();
-    //     // int prev=nums[0];
-    //     list.add(nums[0]);
-
-    //     for(int i=1;i<n;i++) {
-    //         if(nums[i]>list.get(list.size()-1)) {
-    //             list.add(nums[i]);
-    //             // prev=nums[i];
-    //         } else {
-    //             int pos=findPos(list,nums[i]);
-    //             list.set(pos,nums[i]);
-    //         }
-    //     }
-    //     return list.size();
-    // }
-
-    // private int findPos(List<Integer> list, int target) {
-    //     int n=list.size();
-
-    //     int i=0, j=n-1;
-
-    //     while(i<=j){
-    //         int mid=i+(j-i)/2;
-    //         if(list.get(mid)<target) 
-    //             i=mid+1;
-            
-    //         else
-    //             j=mid-1;
-    //     }
-
-    //     return i;
-    // }
-
-
-
+    
     public int lengthOfLIS(int[] nums) {
-        List<Integer> list = new ArrayList<>();
+        int n=nums.length;
+
+        List<Integer> list=new ArrayList<>();
         list.add(nums[0]);
 
-        for(int i=1;i<nums.length;i++) {
+        for(int i=1;i<n;i++) {
             if(nums[i]>list.get(list.size()-1)) {
                 list.add(nums[i]);
             } else {
-                int pos = findPos(list, nums[i]);
-                list.set(pos, nums[i]);
+                int pos=findPos(list,nums[i]);
+                list.set(pos,nums[i]);
             }
         }
         return list.size();
     }
 
+    private int findPos(List<Integer> list, int target) {
+        int n=list.size();
 
-    int findPos(List<Integer> list, int target) {
-        int i=0, j = list.size()-1;
+        int i=0, j=n-1;
 
-        while(i<=j) {
-            int mid = i+(j-i)/2;
-
-            if(list.get(mid)<target)
-                i = mid + 1;
+        while(i<=j){
+            int mid=i+(j-i)/2;
+            if(list.get(mid)<target) 
+                i=mid+1;
             
-            else 
-                j = mid - 1;
+            else
+                j=mid-1;
         }
 
         return i;
