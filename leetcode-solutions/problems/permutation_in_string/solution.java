@@ -1,37 +1,46 @@
 class Solution {
     public boolean checkInclusion(String s1, String s2) {
+        
+        int l1 = s1.length();
+        int l2 = s2.length();
 
-        if(s1.length()>s2.length()) return false;
-        int hashs1[] = new int[26];
-        int hashs2[] = new int[26];
+        if(l1 > l2)
+            return false;
 
-        int l=0,r=0;
-        while(r<s1.length()) {
-            hashs1[s1.charAt(r)-'a']++;
-            hashs2[s2.charAt(r)-'a']++;
+        int[] f1 = new int[26];
+        int[] f2 = new int[26];
+
+        int r = 0;
+        while(r<l1) {
+            f1[s1.charAt(r)-'a']++;
+            f2[s2.charAt(r)-'a']++;
             r++;
         }
+
         r--;
-        while(r<s2.length()) {
-            if(doesMatch(hashs1,hashs2)) return true;
 
-            r++;
-            if(r<s2.length())
-                hashs2[s2.charAt(r)-'a']++;
-            hashs2[s2.charAt(l)-'a']--;
+        int l = 0;
+
+        while(r<l2 && r-l+1==l1) {
+            if(doesMatch(f1,f2))
+                return true;
+
+            f2[s2.charAt(l)-'a']--;
             l++;
+            
+            r++;
+            if(r<l2)
+                f2[s2.charAt(r)-'a']++;
         }
-
         return false;
     }
 
-    private boolean doesMatch(int[] h1, int[] h2) {
+    boolean doesMatch(int[] f1, int[] f2) {
         for(int i=0;i<26;i++) {
-            if(h1[i]!=h2[i]) return false;
+            if(f1[i]!=f2[i])
+                return false;
         }
 
         return true;
-
     }
-
 }
