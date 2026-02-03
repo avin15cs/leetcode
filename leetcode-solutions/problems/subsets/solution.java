@@ -22,23 +22,40 @@ class Solution {
     //     return left;
     // }
 
+    // public List<List<Integer>> subsets(int[] nums) {
+    //     List<List<Integer>> ans=new ArrayList<>();
+    //     solve(nums,nums.length-1,ans, new ArrayList<>());
+    //     return ans;
+    // }
+
+
+    // private void solve(int[] nums, int n, List<List<Integer>> ans, List<Integer> list) {
+    //     if(n<0) {
+    //         List<Integer> cur=new ArrayList<>(list);
+    //         ans.add(cur);
+    //         return;
+    //     }
+
+    //     solve(nums, n-1, ans, list);
+    //     list.add(nums[n]);
+    //     solve(nums, n-1, ans, list);
+    //     list.remove(list.size()-1);
+    // }
+
+
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        solve(nums,nums.length-1,ans, new ArrayList<>());
-        return ans;
+        List<List<Integer>> res = new ArrayList<>();
+        
+        backtrack(res, new ArrayList<>(), nums, 0);
+        return res;
     }
 
-
-    private void solve(int[] nums, int n, List<List<Integer>> ans, List<Integer> list) {
-        if(n<0) {
-            List<Integer> cur=new ArrayList<>(list);
-            ans.add(cur);
-            return;
+    void backtrack(List<List<Integer>> res, List<Integer> ans, int[] nums, int idx) {
+        res.add(new ArrayList<>(ans));
+        for(int i=idx;i<nums.length;i++) {
+            ans.add(nums[i]);
+            backtrack(res,ans,nums,i+1);
+            ans.remove(ans.size()-1);
         }
-
-        solve(nums, n-1, ans, list);
-        list.add(nums[n]);
-        solve(nums, n-1, ans, list);
-        list.remove(list.size()-1);
     }
 }
