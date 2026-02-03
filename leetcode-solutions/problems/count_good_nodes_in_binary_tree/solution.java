@@ -24,14 +24,10 @@ class Solution {
 
         int good = 0;
         if(root.val>=maxSoFar) {
-            good=1;
+            good = 1;
             maxSoFar = root.val;
         }
- 
-        good+=solve(root.left, maxSoFar);
-        good+=solve(root.right, maxSoFar);
 
-        return good;
-
+        return good + solve(root.left,maxSoFar) + solve(root.right,maxSoFar);
     }
 }
