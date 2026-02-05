@@ -7,6 +7,7 @@ class Solution {
     //     return solve(word1, word2, n, m, dp);
     // }
 
+
     // private int solve(String word1, String word2, int n, int m, Integer[][] dp) {
     //     if(n==0)
     //         return m;
@@ -25,25 +26,50 @@ class Solution {
 
     // } 
 
+    // public int minDistance(String word1, String word2) {
+    //     int n=word1.length();
+    //     int m=word2.length();
+    //     int[][] dp = new int[n+1][m+1];
+
+    //     for(int i=0;i<=n;i++) {
+    //         for(int j=0;j<=m;j++) {
+    //             if(i==0)
+    //                 dp[0][j]=j;
+    //             else if(j==0)
+    //                 dp[i][0]=i;
+                
+    //             else if(word1.charAt(i-1)==word2.charAt(j-1))
+    //                 dp[i][j]=dp[i-1][j-1];
+    //             else
+    //                 dp[i][j]=1+Math.min(dp[i-1][j-1], Math.min(dp[i-1][j],dp[i][j-1]));
+    //         }
+    //     }
+
+    //     return dp[n][m];
+    // }
+
     public int minDistance(String word1, String word2) {
         int n=word1.length();
         int m=word2.length();
-        int[][] dp = new int[n+1][m+1];
+        int[] dp = new int[m+1];
 
         for(int i=0;i<=n;i++) {
+            int prev=0;//dp[i-1][j-1];
             for(int j=0;j<=m;j++) {
+                int temp= dp[j];//dp[i-1][j]
                 if(i==0)
-                    dp[0][j]=j;
+                    dp[j]=j;
                 else if(j==0)
-                    dp[i][0]=i;
-                
+                    dp[j]=i;
                 else if(word1.charAt(i-1)==word2.charAt(j-1))
-                    dp[i][j]=dp[i-1][j-1];
+                    dp[j]=prev;
                 else
-                    dp[i][j]=1+Math.min(dp[i-1][j-1], Math.min(dp[i-1][j],dp[i][j-1]));
+                    dp[j]=1+Math.min(prev, Math.min(temp,dp[j-1]));
+
+                prev = temp;
             }
         }
 
-        return dp[n][m];
+        return dp[m];
     }
 }
