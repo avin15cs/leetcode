@@ -61,29 +61,52 @@ class Solution {
     // }
 
 
-    public String convert(String s, int numRows) {
-        if(numRows == 1)
-            return s;
+    // public String convert(String s, int numRows) {
+    //     if(numRows == 1)
+    //         return s;
 
-        List<StringBuilder> rows = new ArrayList<>();
+    //     List<StringBuilder> rows = new ArrayList<>();
 
-        for(int i=0;i<numRows;i++)
-            rows.add(new StringBuilder());
+    //     for(int i=0;i<numRows;i++)
+    //         rows.add(new StringBuilder());
 
-        int i=0;
-        while(i<s.length()) {
+    //     int i=0;
+    //     while(i<s.length()) {
 
-            for(int down = 0;down < numRows && i<s.length();down++)
-                rows.get(down).append(s.charAt(i++));
+    //         for(int down = 0;down < numRows && i<s.length();down++)
+    //             rows.get(down).append(s.charAt(i++));
             
-            for(int up = numRows-2;up>0 && i<s.length();up--)
-                rows.get(up).append(s.charAt(i++));
+    //         for(int up = numRows-2;up>0 && i<s.length();up--)
+    //             rows.get(up).append(s.charAt(i++));
+    //     }
+
+    //     StringBuilder ans = new StringBuilder();
+    //     for(StringBuilder sb: rows)
+    //         ans.append(sb);
+        
+    //     return ans.toString();
+    // }
+
+
+    public String convert(String s, int numRows) {
+        
+        StringBuilder[] sb = new StringBuilder[numRows];
+        for(int i=0;i<numRows;i++)
+            sb[i] = new StringBuilder();
+
+        int i=0, n=s.length();
+        while(i<n) {
+            for(int j=0;i<n && j<numRows;j++)
+                sb[j].append(s.charAt(i++));
+            
+            for(int j=numRows-2;i<n && j>0;j--)
+                sb[j].append(s.charAt(i++));
         }
 
         StringBuilder ans = new StringBuilder();
-        for(StringBuilder sb: rows)
-            ans.append(sb);
-        
+        for(StringBuilder st: sb) {
+            ans.append(st);
+        }
         return ans.toString();
     }
 }
