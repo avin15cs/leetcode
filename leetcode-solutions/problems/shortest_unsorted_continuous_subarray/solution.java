@@ -2,7 +2,7 @@ class Solution {
 
     public int findUnsortedSubarray(int[] nums) {
     int n = nums.length;
-    int left = -1, right = -2; // ensures 0 if already sorted
+    int left = 0, right = -1; // ensures 0 if already sorted
     int max = nums[0], min = nums[n - 1];
 
     for (int i = 1; i < n; i++) {
