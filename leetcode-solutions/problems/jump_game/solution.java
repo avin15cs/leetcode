@@ -27,6 +27,9 @@ class Solution {
             if(farthest<i)
                 return false;
             farthest=Math.max(farthest,i+nums[i]);
+
+            if(farthest>=nums.length-1)
+                return true;
         }
 
         return true;
