@@ -8,7 +8,7 @@ class MedianFinder {
     }
     
     public void addNum(int num) {
-        if(maxH.isEmpty()||maxH.peek()>num)
+        if(maxH.isEmpty()||maxH.peek()>=num)
             maxH.add(num);
 
         else
