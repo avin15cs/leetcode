@@ -19,16 +19,40 @@ class Solution {
     //     return nums;
     // }
 
+    // public int[] sortArrayByParity(int[] nums) {
+    //     int j = 0;
+    //     for(int i=0;i<nums.length;i++) {
+    //         if(nums[i]%2==0) {
+    //             int temp=nums[i];
+    //             nums[i]=nums[j];
+    //             nums[j]=temp;
+    //             j++;
+    //         }
+    //     }
+    //     return nums;
+    // }
+
+
     public int[] sortArrayByParity(int[] nums) {
-        int j = 0;
-        for(int i=0;i<nums.length;i++) {
-            if(nums[i]%2==0) {
-                int temp=nums[i];
-                nums[i]=nums[j];
-                nums[j]=temp;
-                j++;
+        int lastEvenIndex = 0;
+        
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] % 2 == 0) {
+                // We found an even number. Now, "bubble" it backwards
+                // until it sits right next to the previous even number.
+                int current = nums[i];
+                int j = i;
+                
+                while (j > lastEvenIndex) {
+                    nums[j] = nums[j - 1]; // Shift the odd numbers to the right
+                    j--;
+                }
+                
+                nums[lastEvenIndex] = current; // Place the even number
+                lastEvenIndex++;
             }
         }
+        
         return nums;
     }
 
