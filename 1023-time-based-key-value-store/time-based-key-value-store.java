@@ -33,7 +33,10 @@ class TimeMap {
         String ans="";
         while(l<=r) {
             int mid=l+(r-l)/2;
-            if(plist.get(mid).time<=timestamp){
+            int time = plist.get(mid).time;
+            if(time == timestamp)
+                return plist.get(mid).val;
+            else if(time<timestamp){
                 ans=plist.get(mid).val;
                 l=mid+1;
             } else {
