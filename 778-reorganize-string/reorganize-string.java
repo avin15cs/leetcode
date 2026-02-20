@@ -25,7 +25,7 @@ class Solution {
             }
             prev = c;
         }
-
-        return s.length()==sb.length()?sb.toString():"";
+        return sb.toString();
+        // return s.length()==sb.length()?sb.toString():"";
     }
 }
