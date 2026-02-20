@@ -10,7 +10,7 @@ class Solution {
         PriorityQueue<Character> pq = new PriorityQueue<>((a,b)->map.get(b)-map.get(a));
         pq.addAll(map.keySet());
         
-        if(map.get(pq.peek())>(s.length()+1/2))
+        if(map.get(pq.peek())>((s.length()+1)/2))
             return "";
 
         StringBuilder sb = new StringBuilder();
