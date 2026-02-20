@@ -18,16 +18,25 @@ class Solution {
         int n=nums.length;
         int l=0,h=n-1;
         int ans=-1;
-        while(l<=h) {
-            int mid=l+(h-l)/2;
-            if(nums[0]>nums[mid]){
-                // ans=mid;
-                h=mid-1;
-            }
-            else
-                l=mid+1;
-        }
+        // while(l<=h) {
+        //     int mid=l+(h-l)/2;
+        //     if(nums[0]>nums[mid]){
+        //         // ans=mid;
+        //         h=mid-1;
+        //     }
+        //     else
+        //         l=mid+1;
+        // }
         // return ans;
+
+        while(l<h) {
+            int mid=l+(h-l)/2;
+            if(nums[0]<=nums[mid])
+                l=mid+1;
+                
+            else
+                h=mid;
+        }
         return l;
     }
 
