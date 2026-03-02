@@ -5,37 +5,23 @@ class Solution {
         if(n%2!=0)
             return -1;
 
-        PriorityQueue<Integer> maxH = new PriorityQueue<>(Collections.reverseOrder());
-        PriorityQueue<Integer> minH = new PriorityQueue<>();
+        Arrays.sort(skill);
 
-        int k=n/2;
+        int i=0,j=n-1;
 
-        for(int i: skill) {
-            maxH.add(i);
-            minH.add(i);
-
-            if(minH.size()>k)
-                minH.remove();
-            
-            if(maxH.size()>k)
-                maxH.remove();
-        }
-
-        int max = maxH.remove();
-        int min = minH.remove();
-        int sum=max+min;
-        long prodSum = max*min;
-
-        while(maxH.size()>0) {
-            max = maxH.remove();
-            min = minH.remove();
-            int cursum=max+min;
-            if(sum!=cursum)
+        int target = skill[i]+skill[j];
+        long prodSum=0;
+        while(i<j) {
+            if(target!=skill[i]+skill[j])
                 return -1;
-            prodSum = prodSum+max*min;
 
+            prodSum+=skill[i]*skill[j];
+
+            i++;
+            j--;
         }
 
         return prodSum;
+
     }
 }
