@@ -6,11 +6,11 @@ class Solution {
         
         int l=1;
 
-        while(l<h) {
+        while(l<=h) {
             int mid=l+(h-l)/2;
             long reqHours=requiredHours(piles,mid);
             if(reqHours<=n) {
-                h=mid;
+                h=mid-1;
             } else {
                 l=mid+1;
             }
