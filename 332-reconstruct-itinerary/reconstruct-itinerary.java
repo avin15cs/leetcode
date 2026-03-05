@@ -28,31 +28,30 @@ class Solution {
 
         // return result;
 
-        Map<String,PriorityQueue<String>> graph = new HashMap<>();
+        Map<String, PriorityQueue<String>> graph = new HashMap<>();
 
         for(List<String> ticket: tickets) {
-            String src = ticket.get(0);
-            String dest = ticket.get(1);
+            String from = ticket.get(0);
+            String to = ticket.get(1);
 
-            if(!graph.containsKey(src)) {
-                graph.put(src, new PriorityQueue<>());
-            } 
-            graph.get(src).add(dest);
+            if(!graph.containsKey(from)) {
+                PriorityQueue<String> pq = new PriorityQueue<>();
+                graph.put(from, pq);
+            }
+            graph.get(from).add(to);
         }
         List<String> result = new LinkedList<>();
-        dfs("JFK", result, graph);
+        dfs(graph, result, "JFK");
 
         return result;
     }
 
-    void dfs(String airport, List<String> result, Map<String, PriorityQueue<String>> graph) {
-        PriorityQueue<String> dest = graph.get(airport);
+    void dfs(Map<String, PriorityQueue<String>> graph, List<String> result, String from) {
 
-        while(dest!=null && !dest.isEmpty()) {
-            String next = dest.remove();
-            dfs(next, result, graph);
+        PriorityQueue<String> dests = graph.get(from);
+        while(dests!=null && !dests.isEmpty()) {
+                dfs(graph, result, dests.remove());
         }
-
-        result.addFirst(airport);
+        result.addFirst(from);
     }
 }
