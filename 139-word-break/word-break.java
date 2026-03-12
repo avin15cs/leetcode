@@ -14,8 +14,9 @@ class Solution {
             return dp[idx];
 
         for(String word: dict) {
-            if(s.startsWith(word,idx)) {
-                if(solve(idx+word.length(),s,dict,dp)) {
+            int len = word.length();
+            if(idx+len <= s.length() && s.startsWith(word,idx)) {
+                if(solve(idx+len,s,dict,dp)) {
                     return dp[idx]=true;
                 }
             }
