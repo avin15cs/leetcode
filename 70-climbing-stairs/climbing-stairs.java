@@ -17,13 +17,12 @@ class Solution {
     public int climbStairs(int n) {
         if(n<=1)    return 1;
         int l=1, j=1;
-        int sum=0;
 
         for(int i=2;i<=n;i++) {
-            sum = l+j;
+            int sum = l+j;
             j=l;
             l=sum;
         }
-        return sum;
+        return l;
     }
 }
