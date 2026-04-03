@@ -10,8 +10,6 @@ class Solution {
             else
                 j--;
         }
-
         return maxArea;
-
     }
 }
