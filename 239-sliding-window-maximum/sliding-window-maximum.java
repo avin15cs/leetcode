@@ -67,49 +67,18 @@ class Solution {
         
     // }
 
-
-    // public int[] maxSlidingWindow(int[] nums, int k) {
-    //     int n = nums.length;
-    //     int[] ans = new int[n-k+1];
-    //     Deque<Integer> dq = new ArrayDeque<>();
-
-    //     for(int i=0;i<k;i++) {
-            
-    //        while(!dq.isEmpty() && nums[i]>nums[dq.peekLast()])
-    //             dq.removeLast();
-            
-    //         dq.addLast(i);
-    //     }
-
-    //     ans[0] = nums[dq.peekFirst()];
-    //     int idx = 1;
-    //     for(int i=k;i<n;i++) {
-    //         if(!dq.isEmpty() && dq.peekFirst()<=i-k)
-    //             dq.removeFirst();
-
-    //         while(!dq.isEmpty() && nums[i]>nums[dq.peekLast()])
-    //             dq.removeLast();
-
-    //         dq.addLast(i);
-
-    //         ans[idx++]=nums[dq.peekFirst()];
-    //     }
-
-    //     return ans;
-    // }
-
     public int[] maxSlidingWindow(int[] nums, int k) {
         Deque<Integer> dq = new ArrayDeque<>();
-        int n = nums.length;
 
-        int i=0, j=0;
-        int[] ans = new int[n-k+1];
-        while(j<n) {            
+        int i=0, j=0, n=nums.length;
+
+        int[] ans=new int[n-k+1];
+
+        while(j<n) {
             while(!dq.isEmpty() && nums[dq.peekLast()]<nums[j])
                 dq.removeLast();
 
             dq.addLast(j);
-
             if(j-i+1==k) {
                 ans[i]=nums[dq.peekFirst()];
                 if(i==dq.peekFirst())
@@ -119,8 +88,8 @@ class Solution {
             }
 
             j++;
-
         }
+
         return ans;
     }
 }
