@@ -1,19 +1,20 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans=new ArrayList<>();
-        solve(nums,new LinkedHashSet<>(),ans);
-        return ans;
+        List<List<Integer>> res = new ArrayList<>();
+        backtrack(nums, new LinkedHashSet<Integer>(), res);
+        return res;
     }
-    public void solve(int[] nums, Set<Integer> path, List<List<Integer>> res) {
-        if(path.size()==nums.length) {
-            res.add(new ArrayList<>(path));
+
+    private void backtrack(int[] nums, Set<Integer> cur, List<List<Integer>> res) {
+        if(cur.size()==nums.length) {
+            res.add(new ArrayList<>(cur));
             return;
         }
 
-        for(int num: nums) {
-            if(path.add(num)){
-                solve(nums,path,res);
-                path.remove(num);
+        for(int i=0;i<nums.length;i++) {
+            if(cur.add(nums[i])) {
+                backtrack(nums, cur, res);
+                cur.remove(nums[i]);
             }
         }
     }
