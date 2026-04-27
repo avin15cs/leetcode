@@ -2,10 +2,10 @@ class Solution {
     public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans=new ArrayList<>();
         boolean[] used = new boolean[nums.length];
-        solve(nums,new LinkedHashSet<>(),ans,used);
+        solve(nums,new ArrayList<>(),ans,used);
         return ans;
     }
-    public void solve(int[] nums, Set<Integer> path, List<List<Integer>> res, boolean[] used) {
+    public void solve(int[] nums, List<Integer> path, List<List<Integer>> res, boolean[] used) {
         if(path.size()==nums.length) {
             res.add(new ArrayList<>(path));
             return;
@@ -18,7 +18,7 @@ class Solution {
             used[i]=true;
             solve(nums,path,res,used);
             used[i]=false;
-            path.remove(nums[i]);
+            path.remove(path.size()-1);
         }
     }
 }
