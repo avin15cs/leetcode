@@ -28,7 +28,7 @@ class Solution {
                 set.remove(s.charAt(i++));
             
             set.add(c);
-            maxl = Math.max(maxl, set.size());
+            maxl = Math.max(maxl, j-i+1);
             j++;
         }
 
