@@ -1,38 +1,78 @@
 class Solution {
+    // public int leastInterval(char[] tasks, int n) {
+    //     int[] freq = new int[26];
+
+    //     for(char c: tasks) 
+    //         freq[c-'A']++;
+
+    //     PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+
+    //     for(int i=0;i<26;i++) {
+    //         if(freq[i]>0)
+    //             pq.add(freq[i]);
+    //     }
+            
+    //     int time=0;
+    //     while(!pq.isEmpty()) {
+    //         int cycle = n+1;
+    //         List<Integer> list = new ArrayList<>();
+
+    //         while(cycle>0 && !pq.isEmpty()) {
+    //             int cur = pq.poll();
+    //             cur--;
+    //             if(cur>0)
+    //                 list.add(cur);
+    //             cycle--;
+    //             time++;
+    //         }
+
+    //         for(int num: list)
+    //             pq.add(num);
+            
+    //         if(!pq.isEmpty() && cycle>0)
+    //             time+=cycle;
+    //     } 
+
+    //     return time;
+    // }
+
+
     public int leastInterval(char[] tasks, int n) {
+
         int[] freq = new int[26];
 
-        for(char c: tasks) 
-            freq[c-'A']++;
+        for(int i: tasks)
+            freq[i-'A']++;
 
-        PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->b-a);
 
         for(int i=0;i<26;i++) {
             if(freq[i]>0)
                 pq.add(freq[i]);
         }
-            
-        int time=0;
+
+        int count=0;
         while(!pq.isEmpty()) {
             int cycle = n+1;
+
             List<Integer> list = new ArrayList<>();
 
-            while(cycle>0 && !pq.isEmpty()) {
-                int cur = pq.poll();
-                cur--;
-                if(cur>0)
-                    list.add(cur);
+            while(!pq.isEmpty() && cycle>0) {
+                int num = pq.remove();
+                num--;
+                if(num>0)
+                    list.add(num);
                 cycle--;
-                time++;
+                count++;
             }
 
-            for(int num: list)
-                pq.add(num);
-            
-            if(!pq.isEmpty() && cycle>0)
-                time+=cycle;
-        } 
+            for(int i: list)
+                pq.add(i);
 
-        return time;
+            if(!pq.isEmpty() && cycle>0)
+                count+=cycle;
+        }
+
+        return count;
     }
 }
