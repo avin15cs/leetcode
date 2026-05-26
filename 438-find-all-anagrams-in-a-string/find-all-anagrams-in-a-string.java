@@ -15,7 +15,8 @@ class Solution {
             hashs[s.charAt(r)-'a']++;
             
             if(r-l+1==n){
-                if(doesMatch(hashs,hashp)) 
+                // if(doesMatch(hashs,hashp)) 
+                if(Arrays.equals(hashs,hashp))
                     list.add(l);
                 
                 hashs[s.charAt(l)-'a']--;
@@ -26,13 +27,13 @@ class Solution {
         } 
         return list;
     }
-    public boolean doesMatch(int[] hs, int[] hp)
-    {
-        for(int i=0;i<26;i++)
-        {
-            if(hs[i] != hp[i])
-                return false;
-        }
-        return true;
-    }
+    // public boolean doesMatch(int[] hs, int[] hp)
+    // {
+    //     for(int i=0;i<26;i++)
+    //     {
+    //         if(hs[i] != hp[i])
+    //             return false;
+    //     }
+    //     return true;
+    // }
 }
