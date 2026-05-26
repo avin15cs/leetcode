@@ -12,8 +12,10 @@ class Solution {
                 map.put(key,new ArrayList<>());
             }
             
-            List<String> list=map.get(key);
-            list.add(str);
+            // List<String> list=map.get(key);
+            // list.add(str);
+
+            map.get(key).add(str);
         }
         
         return new ArrayList<>(map.values());
