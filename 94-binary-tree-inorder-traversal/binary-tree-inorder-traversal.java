@@ -14,40 +14,20 @@
  * }
  */
 class Solution {
-
-    //DFS Approach
-    // public List<Integer> inorderTraversal(TreeNode root) {
-    //     List<Integer> list=new ArrayList<>();
-    //     inorder(root,list);
-    //     return list;
-    // }
-
-    // private void inorder(TreeNode root, List<Integer> list) {
-    //     if(root==null)
-    //         return;
-        
-    //     inorder(root.left,list);
-    //     list.add(root.val);
-    //     inorder(root.right,list);
-    // }
-
-    //BFS Approach
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> list = new ArrayList<>();
 
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        TreeNode cur = root;
-
-        while(cur!=null||!stack.isEmpty()) {
-            while(cur!=null){
-                stack.add(cur);
-                cur = cur.left;
-            }
-            cur = stack.pop();
-            list.add(cur.val);
-            cur = cur.right;
-        }
+        inOrder(root, list);
 
         return list;
+    }
+
+    private void inOrder(TreeNode root, List<Integer> list) {
+        if(root==null)
+            return;
+
+        inOrder(root.left, list);
+        list.add(root.val);
+        inOrder(root.right, list);
     }
 }
