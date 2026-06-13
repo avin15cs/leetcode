@@ -3,21 +3,34 @@ class Solution {
         
         Map<String, Integer> map = new HashMap<>();
 
-        for(String domain: cpdomains) {
-            String[] parts = domain.split(" ");
+        for(String cpdomain: cpdomains) {
+            String[] parts = cpdomain.split(" ");
             int count = Integer.parseInt(parts[0]);
 
-            String[] domains = parts[1].split("\\.");
+            // String[] domains = parts[1].split("\\.");
 
-            String current = "";
-            for(int i=domains.length-1;i>=0;i--) {
-                if(current.isEmpty())
-                    current = domains[i];
-                else
-                    current=domains[i]+"."+current;
+            // String current = "";
+            // for(int i=domains.length-1;i>=0;i--) {
+            //     if(current.isEmpty())
+            //         current = domains[i];
+            //     else
+            //         current=domains[i]+"."+current;
 
-                map.put(current, map.getOrDefault(current,0)+count);
+            //     map.put(current, map.getOrDefault(current,0)+count);
+            // }
+
+            String domain = parts[1];
+
+            while(true) {
+                map.put(domain, map.getOrDefault(domain,0)+count);
+                int dot = domain.indexOf(".");
+
+                if(dot == -1)
+                    break;
+
+                domain = domain.substring(dot+1);   
             }
+
         }
 
         List<String> result = new ArrayList<>();
