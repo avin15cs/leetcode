@@ -48,13 +48,15 @@ class Solution {
         if(i<0||j<0||i==board.length||j==board[0].length||board[i][j]!=word.charAt(idx))
             return false;
 
+        char temp = board[i][j];
         board[i][j]='*';
+
         boolean result = exists(board, word, i+1, j, idx+1)||
                             exists(board, word, i-1, j, idx+1)||
                             exists(board, word, i, j+1, idx+1)||
                             exists(board, word, i, j-1, idx+1);
         
-        board[i][j]=word.charAt(idx);
+        board[i][j]=temp;
         return result;
     }
 
