@@ -25,35 +25,38 @@ class Solution {
     //                     exists(board,word,r,c-1,idx+1);
     //     board[r][c]=word.charAt(idx);
     //     return result;
-    // }
+    // }  
+
 
     public boolean exist(char[][] board, String word) {
 
-        int n=board.length;
-        int m=board[0].length;
-
-        for(int i=0;i<n;i++) {
-            for(int j=0;j<m;j++) {
+        for(int i=0;i<board.length;i++) {
+            for(int j=0;j<board[0].length;j++) {
                 if(exists(board, word, i, j, 0))
                     return true;
             }
         }
+
         return false;
     }
+
 
     private boolean exists(char[][] board, String word, int i, int j, int idx) {
         if(idx==word.length())
             return true;
 
-        if(i<0||j<0||i>=board.length||j>=board[0].length||board[i][j]!=word.charAt(idx)||board[i][j]=='*')
+        if(i<0||j<0||i==board.length||j==board[0].length||board[i][j]!=word.charAt(idx))
             return false;
 
         board[i][j]='*';
-        boolean result = exists(board,word,i+1,j,idx+1)||exists(board,word,i,j+1,idx+1)
-                ||exists(board,word,i-1,j,idx+1)||exists(board,word,i,j-1,idx+1);
-
+        boolean result = exists(board, word, i+1, j, idx+1)||
+                            exists(board, word, i-1, j, idx+1)||
+                            exists(board, word, i, j+1, idx+1)||
+                            exists(board, word, i, j-1, idx+1);
+        
         board[i][j]=word.charAt(idx);
-
         return result;
-    }    
+    }
+
+
 }
