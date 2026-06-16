@@ -23,4 +23,33 @@ class Solution {
         sinkIsland(grid,i,j+1,m,n);
         sinkIsland(grid,i,j-1,m,n);
     }
+
+
+    private void sinkIsland(char[][] grid, int row, int col) {
+        Queue<int[]> que = new LinkedList<>();
+        que.add(new int[]{row, col});
+
+        grid[row][col] = '0';
+
+        int[][] dirs = {{-1,0},{1,0},{0,1},{0,-1}};
+
+        while(!que.isEmpty()) {
+            int[] cell = que.remove();
+
+            int r = cell[0];
+            int c = cell[1];
+
+            for(int[] dir: dirs) {
+                int nr = r + dir[0];
+                int nc = c + dir[1];
+
+                if(nr>=0 && nr < grid.length &&
+                    nc>=0 && nc < grid[0].length &&
+                    grid[nr][nc]=='1') {
+                        que.add(new int[]{nr,nc});
+                        grid[nr][nc]='0';
+                }
+            }
+        }
+    }
 }
