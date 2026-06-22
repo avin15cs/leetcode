@@ -14,14 +14,13 @@ class Solution {
                 distinct++;
 
             if(right-left+1 == minSize) {
-                if(right-left+1==minSize) {
-                    if(distinct<=maxLetters) {
-                        String sub = s.substring(left,right+1);
-                        int freq = map.getOrDefault(sub,0)+1;
-                        map.put(sub,freq);
-                        ans = Math.max(ans, freq);
-                    }
-                } 
+                if(distinct<=maxLetters) {
+                    String sub = s.substring(left,right+1);
+                    int freq = map.getOrDefault(sub,0)+1;
+                    map.put(sub,freq);
+                    ans = Math.max(ans, freq);
+                }
+                
                 if(--count[s.charAt(left)-'a']==0)
                     distinct--;
                 
