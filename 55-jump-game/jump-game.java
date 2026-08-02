@@ -30,27 +30,41 @@ class Solution {
     //     return true;
     // }
 
+    // public boolean canJump(int[] nums) {
+    //     Boolean[] dp = new Boolean[nums.length+1];
+    //     return findPath(nums, 0, dp);
+    // }
+
+    // boolean findPath(int[] nums, int cur, Boolean[] dp) {
+    //     if(cur==nums.length-1)
+    //         return true;
+
+    //     if(nums[cur]==0)
+    //         return dp[cur] = false;
+
+    //     if(dp[cur]!=null)
+    //         return dp[cur];
+
+    //     for(int i=cur+1;i<=nums[cur]+cur;i++) {
+    //         if(findPath(nums, i, dp))
+    //             return dp[cur] = true;
+    //     }
+
+    //     return dp[cur] = false;
+    // }
+
+
+
     public boolean canJump(int[] nums) {
-        Boolean[] dp = new Boolean[nums.length+1];
-        return findPath(nums, 0, dp);
-    }
+        int farthest = nums[0];
 
-    boolean findPath(int[] nums, int cur, Boolean[] dp) {
-        if(cur==nums.length-1)
-            return true;
+        for(int i=1;i<nums.length;i++) {
+            if(farthest<i)
+                return false;
 
-        if(nums[cur]==0)
-            return dp[cur] = false;
-
-        if(dp[cur]!=null)
-            return dp[cur];
-
-        for(int i=cur+1;i<=nums[cur]+cur;i++) {
-            if(findPath(nums, i, dp))
-                return dp[cur] = true;
+            farthest = Math.max(farthest, i+nums[i]);
         }
 
-        return dp[cur] = false;
+        return true;
     }
-
 }
