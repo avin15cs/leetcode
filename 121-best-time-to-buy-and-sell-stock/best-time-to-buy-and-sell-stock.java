@@ -11,22 +11,22 @@ class Solution {
     //     return maxProfit;
     // }
 
+//Kadane's Algo
     public int maxProfit(int[] prices) {
-    int curr = 0;
-    int ans = 0;
+        int diff=0, ans=0;
+        int cur=0;
+        for(int i=1;i<prices.length;i++) {
+            diff = prices[i]-prices[i-1];
 
-    for (int i = 1; i < prices.length; i++) {
-        int diff = prices[i] - prices[i - 1];
+            cur = cur+diff;
+            if(cur<0) {
+                cur=0;
+            }
 
-        curr += diff;
-
-        if (curr < 0) {
-            curr = 0;
+            ans = Math.max(ans, cur);
         }
 
-        ans = Math.max(ans, curr);
+        return ans;
     }
 
-    return ans;
-}
 }
