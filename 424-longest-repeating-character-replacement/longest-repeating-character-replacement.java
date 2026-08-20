@@ -1,13 +1,15 @@
 class Solution {
     public int characterReplacement(String s, int k) {
-        int maxRepeat = 0, ans = 0;
-        int j=0,i=0;
-        int[] f = new int[26];
-        while(j<s.length()) {
-            int idx = s.charAt(j) - 'A';
+        int[] f= new int[26];
+        int i=0,j=0,n=s.length();
+        int maxFreq=0;
+        int ans=0;
+        while(j<n) {
+            int idx = s.charAt(j)-'A';
             f[idx]++;
-            maxRepeat = Math.max(maxRepeat, f[idx]);
-            if(j-i+1-maxRepeat>k) {
+            maxFreq = Math.max(maxFreq, f[idx]);
+
+            while((j-i+1)-maxFreq>k) {
                 f[s.charAt(i)-'A']--;
                 i++;
             }
@@ -17,5 +19,6 @@ class Solution {
         }
 
         return ans;
+
     }
 }
