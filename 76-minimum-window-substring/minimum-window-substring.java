@@ -63,44 +63,47 @@ class Solution {
     // }
 
     public String minWindow(String s, String t) {
-        int ls = s.length();
-        int lt = t.length();
+        int sl = s.length();
+        int tl = t.length();
 
-        if(lt>ls)
-            return "";
+        if(tl>sl) return "";
 
         Map<Character, Integer> tmap = new HashMap<>();
-        for(char c: t.toCharArray()) 
-            tmap.put(c, tmap.getOrDefault(c, 0)+1);
-        
-        int tsize = tmap.size();
-        int size=0;
+        for(int i=0;i<tl;i++) {
+            char c = t.charAt(i);
+            tmap.put(c,tmap.getOrDefault(c,0)+1);
+        }
+
+        int size = tmap.size();
         Map<Character, Integer> smap = new HashMap<>();
-        int i=0,j=0;
-        int min=Integer.MAX_VALUE, start = 0;
-        while(j<ls) {
+
+        int i=0,j=0, reqSize = 0, minSize = Integer.MAX_VALUE, start=0;
+
+        while(j<sl) {
             char c = s.charAt(j);
             smap.put(c, smap.getOrDefault(c,0)+1);
 
-            if(tmap.containsKey(c) && smap.get(c).intValue()==tmap.get(c).intValue())
-                size++;
+            if(tmap.containsKey(c) && tmap.get(c).intValue()==smap.get(c).intValue())
+                reqSize++;
 
-            while(size==tsize) {
-                if(min>j-i+1) {
-                    min=j-i+1;
-                    start=i;
+            while(size == reqSize) {
+
+                if(minSize>j-i+1) {
+                    minSize = j-i+1;
+                    start = i;
                 }
-                char ch = s.charAt(i);
-                smap.put(ch,smap.getOrDefault(ch,0)-1);
-                if(tmap.containsKey(ch) && smap.get(ch)<tmap.get(ch))
-                    size--;
-                
+
+                char ci = s.charAt(i);
+                smap.put(ci, smap.get(ci)-1);
+
+                if(tmap.containsKey(ci)&&smap.get(ci)<tmap.get(ci))
+                    reqSize--;
+
                 i++;
             }
-
             j++;
         }
 
-        return min==Integer.MAX_VALUE?"":s.substring(start,start+min);
+        return minSize==Integer.MAX_VALUE?"":s.substring(start,start+minSize);
     }
 }
