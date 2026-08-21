@@ -49,28 +49,29 @@ class Solution {
     // }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> res = new ArrayList<>();
-        backtrack(candidates, 0, target, new ArrayList<>(), res);
-        return res;
+        List<List<Integer>> result = new ArrayList<>();
+        solve(candidates, target, candidates.length, new ArrayList<>(), result);
+
+        return result;
     }
 
-    private void backtrack(int[] nums, int start, int target, List<Integer> cur, List<List<Integer>> res) {
-        if(target == 0) {
-            res.add(new ArrayList<>(cur));
+    public void solve(int[] nums, int target, int n, List<Integer> cur, List<List<Integer>> result) {
+        if(target==0) {
+            result.add(new ArrayList<>(cur));
             return;
         }
 
-        if(target<0)
+        if(target<0||n<=0)
             return;
 
-        for(int i=start;i<nums.length;i++) {
-            if(nums[i]>target)
-                continue;
-            
-            cur.add(nums[i]);
-            backtrack(nums, i, target-nums[i], cur, res);
+        if(nums[n-1]<=target) {
+            cur.add(nums[n-1]);
+            solve(nums, target-nums[n-1],n,cur, result);
             cur.remove(cur.size()-1);
         }
+
+        solve(nums, target, n-1, cur, result);
+        
     }
 }
 
