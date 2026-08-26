@@ -19,10 +19,7 @@ class Solution {
                 st.push(']');
             
             else {
-                if(st.isEmpty())
-                    return false;
-                    
-                if(!st.isEmpty() && st.pop()!=c)
+                if(st.isEmpty() || st.pop()!=c)
                     return false;
             }
 
