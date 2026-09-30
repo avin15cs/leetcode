@@ -1,5 +1,5 @@
 class LRUCache {
-    class Node {
+    static class Node {
         int key, value;
         Node prev, next;
 
@@ -45,7 +45,7 @@ class LRUCache {
         Node nNode = new Node(key, value);
         map.put(key, nNode);
         addNextToHead(nNode);
-        if(map.size()> capacity) {
+        if(map.size() > capacity) {
             Node last = tail.prev;
             remove(last);
             map.remove(last.key);
